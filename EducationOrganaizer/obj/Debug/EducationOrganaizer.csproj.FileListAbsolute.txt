@@ -1,0 +1,6 @@
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/bin/Debug/EducationOrganaizer.exe
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/bin/Debug/EducationOrganaizer.pdb
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/obj/Debug/EducationOrganaizer.csproj.AssemblyReference.cache
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/obj/Debug/EducationOrganaizer.csproj.CoreCompileInputs.cache
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/obj/Debug/EducationOrganaizer.exe
+/Users/homeland/RiderProjects/EducationOrganaizer/EducationOrganaizer/obj/Debug/EducationOrganaizer.pdb
