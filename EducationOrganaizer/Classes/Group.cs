@@ -4,12 +4,14 @@ namespace EducationOrganaizer.Classes
 {
     public class Group
     {
+        public string Name { get; set; }
         public List<Student> ListOfStudents { get; set; }
         public List<Lesson> ListOfLessons{ get; set; }
         public List<AbstractTask> ListOfTasks { get; set; }
 
-        public Group()
+        public Group(string name)
         {
+            Name = name;
             ListOfStudents = new List<Student>();
             ListOfLessons = new List<Lesson>();
             ListOfTasks = new List<AbstractTask>();
@@ -34,5 +36,7 @@ namespace EducationOrganaizer.Classes
             }
             return false;
         }
+
+
     }
 }

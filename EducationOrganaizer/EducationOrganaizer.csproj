@@ -39,15 +39,14 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Classes\EducationOrganaizer.cs" />
         <Compile Include="Classes\Group.cs" />
-        <Compile Include="Classes\Groups.cs" />
         <Compile Include="Classes\Lesson.cs" />
         <Compile Include="Classes\LessonEnum.cs" />
         <Compile Include="Classes\Project.cs" />
         <Compile Include="Classes\RegularTask.cs" />
         <Compile Include="Classes\Student.cs" />
         <Compile Include="Classes\AbstractTask.cs" />
-        <Compile Include="Classes\Tasks.cs" />
         <Compile Include="Classes\Testing.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

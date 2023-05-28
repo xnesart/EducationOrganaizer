@@ -11,7 +11,5 @@ namespace EducationOrganaizer.Classes
             LinksToAdditionalMaterials = links;
             Deadline = deadline;
         }
-
-        
     }
 }
