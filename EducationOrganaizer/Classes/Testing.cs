@@ -1,11 +1,7 @@
 namespace EducationOrganaizer.Classes
 {
-    public class Testing
+    public class Testing:AbstractTask
     {
-        public string Name { get; set; }
-        public string LinkToTesting { get; set; }
-        public string Deadline { get; set; }
-
         public Testing(string name, string linkToTesting, string deadline)
         {
             Name = name;

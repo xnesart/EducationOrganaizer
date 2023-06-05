@@ -6,13 +6,17 @@ namespace EducationOrganaizer.Classes
     public class Group
     {
         public string Name { get; set; }
-        public List<Student> ListOfStudents { get; set; }
-        public List<Lesson> ListOfLessons{ get; set; }
+        private List<Student> ListOfStudents { get; set; }
+        public List<Lesson> ListOfLessons { get; set; }
         public List<AbstractTask> ListOfTasks { get; set; }
-        public List<RegularTask> ListOfRegularTasks = new List<RegularTask>();
-        public List<Project> ListOfProjects = new List<Project>();
-        public List<Testing> ListOfTesting = new List<Testing>();
-        
+
+        private List<Lesson> ListOfSeminars { get; set; } = new List<Lesson>();
+        private List<Lesson> ListOfLectures { get; set; } = new List<Lesson>();
+        private List<Lesson> ListOfAnotherLessons { get; set; } = new List<Lesson>();
+        private List<RegularTask> ListOfRegularTasks = new List<RegularTask>();
+        private List<Project> ListOfProjects = new List<Project>();
+        private List<Testing> ListOfTesting = new List<Testing>();
+
         public Group(string name)
         {
             Name = name;
@@ -22,11 +26,11 @@ namespace EducationOrganaizer.Classes
         }
 
 
-
         public void AddRegularTask(RegularTask regularTask)
         {
             ListOfRegularTasks.Add(regularTask);
         }
+
         public bool RemoveRegularTask(string name)
         {
             bool isDelete = false;
@@ -40,7 +44,7 @@ namespace EducationOrganaizer.Classes
                     return isDelete;
                 }
             }
-            
+
             return isDelete;
         }
 
@@ -55,6 +59,7 @@ namespace EducationOrganaizer.Classes
                 Console.WriteLine("/------------------/");
             }
         }
+
         public void DisplayRegularTasks()
         {
             foreach (var regTask in ListOfRegularTasks)
@@ -66,7 +71,7 @@ namespace EducationOrganaizer.Classes
                 Console.WriteLine("/------------------/");
             }
         }
-      
+
         public void DisplayProjects()
         {
             foreach (var project in ListOfProjects)
@@ -80,13 +85,6 @@ namespace EducationOrganaizer.Classes
             }
         }
 
-
- 
-
-        public void CreateStudent()
-        {
-            
-        }
         public void AddStudent(Student student)
         {
             ListOfStudents.Add(student);
@@ -100,12 +98,11 @@ namespace EducationOrganaizer.Classes
                 ListOfStudents.Remove(studentToRemove);
                 return true;
             }
+
             return false;
         }
-        
-      
 
-    
+
         public void AddProject(Project project)
         {
             ListOfProjects.Add(project);
@@ -149,6 +146,7 @@ namespace EducationOrganaizer.Classes
 
             return isDelete;
         }
+
         public void DisplayTestings()
         {
             foreach (var testings in ListOfTesting)
@@ -161,10 +159,130 @@ namespace EducationOrganaizer.Classes
             }
         }
 
+        public void DisplaySeminarsInGroup()
+        {
+            foreach (var seminar in ListOfSeminars)
+            {
+                Console.WriteLine("/------------------/");
+                Console.WriteLine(seminar.ListOfTopics);
+                Console.WriteLine(seminar.Date);
+                Console.WriteLine(seminar.CommentFromTeacher);
+                Console.WriteLine("/------------------/");
+            }
+        }
 
- 
-        
+        public void AddSeminarToListOFSeminars(Lesson lesson)
+        {
+            ListOfSeminars.Add(lesson);
+            Console.WriteLine("семинар добавлен");
+        }
 
+        public bool RemoveSeminarFromListOfSeminars(string topic, string date)
+        {
+            bool isDelete = false;
+            foreach (var lesson in ListOfSeminars)
+            {
+                if (lesson.ListOfTopics.Contains(topic))
+                {
+                    if (lesson.Date == date)
+                    {
+                        ListOfSeminars.Remove(lesson);
+                        Console.WriteLine("семинар удалён");
+                        isDelete = true;
+                        return isDelete;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("семинар не найден");
+                }
+            }
 
+            return isDelete;
+        }
+
+        public void DisplayLecturesInGroup()
+        {
+            foreach (var lecture in ListOfLectures)
+            {
+                Console.WriteLine("/------------------/");
+                Console.WriteLine(lecture.ListOfTopics);
+                Console.WriteLine(lecture.Date);
+                Console.WriteLine(lecture.CommentFromTeacher);
+                Console.WriteLine("/------------------/");
+            }
+        }
+
+        public void AddLectureToListOFLectures(Lesson lesson)
+        {
+            ListOfLectures.Add(lesson);
+            Console.WriteLine("Лекция добавлена");
+        }
+
+        public bool RemoveLectureFromListOfListOfLectures(string topic, string date)
+        {
+            bool isDelete = false;
+            foreach (var lecture in ListOfLectures)
+            {
+                if (lecture.ListOfTopics.Contains(topic))
+                {
+                    if (lecture.Date == date)
+                    {
+                        ListOfLectures.Remove(lecture);
+                        Console.WriteLine("лекция удалена");
+                        isDelete = true;
+                        return isDelete;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("лекция не найдена");
+                }
+            }
+
+            return isDelete;
+        }
+
+        public void DisplayListOfAnotherLessonsInGroup()
+        {
+            foreach (var anotherLesson in ListOfAnotherLessons)
+            {
+                Console.WriteLine("/------------------/");
+                Console.WriteLine(anotherLesson.ListOfTopics);
+                Console.WriteLine(anotherLesson.Date);
+                Console.WriteLine(anotherLesson.CommentFromTeacher);
+                Console.WriteLine("/------------------/");
+            }
+        }
+
+        public void AddAnotherLessonToListOfAnotherLessons(Lesson lesson)
+        {
+            ListOfAnotherLessons.Add(lesson);
+            Console.WriteLine("Другой тип занятия добавлен");
+        }
+
+        public bool RemoveAnotherLessonFromListOfAnotherLessons(string topic, string date)
+        {
+            bool isDelete = false;
+            foreach (var anotherLesson in ListOfAnotherLessons)
+            {
+                if (anotherLesson.ListOfTopics.Contains(topic))
+                {
+                    if (anotherLesson.Date == date)
+                    {
+                        ListOfLectures.Remove(anotherLesson);
+                        Console.WriteLine("занятие удалено");
+                        isDelete = true;
+                        return isDelete;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("занятие не найдено");
+                }
+            }
+
+            return isDelete;
+        }
     }
 }
