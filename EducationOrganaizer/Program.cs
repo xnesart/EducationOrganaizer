@@ -173,6 +173,7 @@ namespace EducationOrganaizer
                                                     {
                                                         break;
                                                     }
+
                                                     while (true)
                                                     {
                                                         switch (choice)
@@ -210,6 +211,7 @@ namespace EducationOrganaizer
                                                                     Console.WriteLine(
                                                                         "Тестирование удалить не удалось");
                                                                 }
+
                                                                 break;
                                                             case "3":
                                                                 break;
@@ -272,6 +274,7 @@ namespace EducationOrganaizer
                                                             case "3":
                                                                 break;
                                                         }
+
                                                         break;
                                                     }
 
@@ -432,25 +435,31 @@ namespace EducationOrganaizer
                         Console.WriteLine("Список групп:");
                         educationOrganaizer.DisplayGroups();
                         Console.WriteLine("Введите название группы для просмотра");
-                        string userAnswer = Console.ReadLine();
-                        while (true)
+                        choice = Console.ReadLine();
+                        Group group = educationOrganaizer.SearchGroup(choice);
+                        if (group == null)
                         {
-                            Group group = educationOrganaizer.SearchGroup(userAnswer);
-                            if (group == null)
+                            Console.WriteLine("Группа не найдена");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{group.Name} - найдена");
+                            while (true)
                             {
-                                Console.WriteLine("Группа не найдена");
-                                break;
-                            }
-                            else
-                            {
-                                Console.WriteLine($"{group.Name} - найдена");
                                 Console.WriteLine("1, чтобы посмотреть список обычных заданий");
                                 Console.WriteLine("2, чтобы посмотреть список тестирований");
                                 Console.WriteLine("3, чтобы посмотреть список проектов");
                                 Console.WriteLine("4, чтобы посмотреть список студентов");
                                 Console.WriteLine("5, чтобы посомтреть список занятий");
-                                userAnswer = Console.ReadLine();
-                                switch (userAnswer)
+                                Console.WriteLine("6, чтобы вернуться назад");
+                                choice = Console.ReadLine();
+                                if (choice == "6")
+                                {
+                                    break;
+                                }
+
+                                switch (choice)
                                 {
                                     case "1":
                                         Console.WriteLine("Список обычных заданий:");
@@ -495,21 +504,16 @@ namespace EducationOrganaizer
                                             case "4":
                                                 break;
                                         }
+
                                         break;
                                 }
                             }
                         }
 
                         break;
-
                     case "x":
                         return;
                 }
-
-
-                //функционал добавления группы
-
-                //добавляем в группу студентов
             }
         }
     }
