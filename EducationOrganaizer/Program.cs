@@ -18,7 +18,8 @@ namespace EducationOrganaizer
             {
                 Console.WriteLine("Здравствуйте, выберите интересующую вас опцию");
                 Console.WriteLine("Нажмите 1, чтобы создать или отредактировать группы");
-                Console.WriteLine("Нажмите 2, чтобы посмотреть список групп");
+                Console.WriteLine("Нажмите 2, чтобы удалить группу");
+                Console.WriteLine("Нажмите 3, чтобы посмотреть список групп");
                 Console.WriteLine("Нажмите 'x', чтобы выйти");
                 var choice = Console.ReadLine();
                 switch (choice)
@@ -26,6 +27,10 @@ namespace EducationOrganaizer
                     case "1":
                         Console.WriteLine("Введите название группы");
                         string groupName = Console.ReadLine();
+                        if (groupName == "r")
+                        {
+                            throw new ArgumentException("Название группы не должно быть 'r'");
+                        }
                         Group newGroup = new Group(groupName);
                         if (educationOrganaizer.SearchGroup(groupName) != null)
                         {
@@ -432,6 +437,33 @@ namespace EducationOrganaizer
 
                         break;
                     case "2":
+                        educationOrganaizer.DisplayGroups();
+                        Console.WriteLine("Нажмите 1, чтобы удалить группу");
+                        Console.WriteLine("Нажмите 2, чтобы вернуться назад");
+                        choice = Console.ReadLine();
+                        switch (choice)
+                        {
+                           case "1":
+                               educationOrganaizer.DisplayGroups();
+                               Console.WriteLine("Введите название группы, напишите 'r', чтобы вернуться назад");
+                               string groupNameForDelete = Console.ReadLine();
+                               if (groupNameForDelete == "r")
+                               {
+                                   break;
+                               }
+
+                              bool isDelete = educationOrganaizer.RemoveGroup(groupNameForDelete);
+                               if (isDelete == false)
+                               {
+                                   Console.WriteLine("Группу удалить не удалось");
+                               } 
+                               
+                               break;
+                           case "2":
+                               break;
+                        }
+                        break;
+                    case "3":
                         Console.WriteLine("Список групп:");
                         educationOrganaizer.DisplayGroups();
                         Console.WriteLine("Введите название группы для просмотра");
