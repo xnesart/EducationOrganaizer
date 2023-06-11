@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EducationOrganaizer.Classes;
+using Newtonsoft.Json;
 
 
 namespace EducationOrganaizer
@@ -25,20 +26,24 @@ namespace EducationOrganaizer
                 switch (choice)
                 {
                     case "1":
+                        educationOrganaizer.ShowAllJson();
                         Console.WriteLine("Введите название группы");
                         string groupName = Console.ReadLine();
                         if (groupName == "r")
                         {
                             throw new ArgumentException("Название группы не должно быть 'r'");
                         }
+
+                        Group groupFromRead = educationOrganaizer.ReadGroupFromBdOrCreateNewGroup(groupName);
                         Group newGroup = new Group(groupName);
-                        if (educationOrganaizer.SearchGroup(groupName) != null)
+                        if (groupFromRead != null)
                         {
-                            newGroup = educationOrganaizer.SearchGroup(groupName);
+                            newGroup = groupFromRead;
                         }
                         else
                         {
                             educationOrganaizer.AddGroupInListOfGroup(newGroup);
+                            educationOrganaizer.SaveToDb(newGroup);
                         }
 
                         while (true)
@@ -78,11 +83,7 @@ namespace EducationOrganaizer
                                                     newGroup.AddStudent(student);
                                                     Console.WriteLine("Студент добавлен");
 
-                                                    // StreamWriter writer = new StreamWriter("group.txt");
-                                                    // foreach (var item in newGroup.ListOfStudents)
-                                                    // {
-                                                    //     writer.WriteLine(item);
-                                                    // }
+                                                    educationOrganaizer.SaveToDb(newGroup);
 
                                                     break;
                                                 case "2":
@@ -92,6 +93,7 @@ namespace EducationOrganaizer
                                                     if (check == true)
                                                     {
                                                         Console.WriteLine("студент удалён");
+                                                        educationOrganaizer.SaveToDb(newGroup);
                                                     }
                                                     else
                                                     {
@@ -141,6 +143,7 @@ namespace EducationOrganaizer
                                                                     description, links, deadline);
 
                                                                 newGroup.AddRegularTask(regularTask);
+                                                                educationOrganaizer.SaveToDb(newGroup);
                                                                 Console.WriteLine("Задание добавлено");
                                                                 break;
                                                             case "2":
@@ -159,6 +162,7 @@ namespace EducationOrganaizer
                                                                     Console.WriteLine("Задание удалить не удалось");
                                                                 }
 
+                                                                educationOrganaizer.SaveToDb(newGroup);
                                                                 break;
                                                             case "3":
                                                                 break;
@@ -199,6 +203,7 @@ namespace EducationOrganaizer
                                                                 Testing testing = new Testing(testingName, links,
                                                                     deadline);
                                                                 newGroup.AddTesting(testing);
+                                                                educationOrganaizer.SaveToDb(newGroup);
                                                                 break;
                                                             case "2":
                                                                 Console.WriteLine(
@@ -216,6 +221,8 @@ namespace EducationOrganaizer
                                                                     Console.WriteLine(
                                                                         "Тестирование удалить не удалось");
                                                                 }
+
+                                                                educationOrganaizer.SaveToDb(newGroup);
 
                                                                 break;
                                                             case "3":
@@ -258,6 +265,8 @@ namespace EducationOrganaizer
                                                                     links, deadline, subtasks);
 
                                                                 newGroup.AddProject(project);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "2":
                                                                 Console.WriteLine(
@@ -274,6 +283,8 @@ namespace EducationOrganaizer
                                                                 {
                                                                     Console.WriteLine("Проект удалить не удалось");
                                                                 }
+
+                                                                educationOrganaizer.SaveToDb(newGroup);
 
                                                                 break;
                                                             case "3":
@@ -325,6 +336,8 @@ namespace EducationOrganaizer
                                                                 Lesson lesson = new Lesson(dateOfSeminar, listOfTopics,
                                                                     seminarCommentary, LessonEnum.Consultation);
                                                                 newGroup.AddSeminarToListOFSeminars(lesson);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "2":
                                                                 Console.WriteLine("Введите тему семинара для удаления");
@@ -334,6 +347,8 @@ namespace EducationOrganaizer
                                                                 newGroup.RemoveSeminarFromListOfSeminars(
                                                                     seminarForDelete,
                                                                     seminarDateForDelete);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "3":
                                                                 break;
@@ -363,6 +378,8 @@ namespace EducationOrganaizer
                                                                 Lesson lesson = new Lesson(dateOfLecture, listOfTopics,
                                                                     lectureCommentary, LessonEnum.Lecture);
                                                                 newGroup.AddLectureToListOFLectures(lesson);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "2":
                                                                 Console.WriteLine("Введите тему лекции для удаления");
@@ -372,6 +389,8 @@ namespace EducationOrganaizer
                                                                 newGroup.RemoveLectureFromListOfListOfLectures(
                                                                     lectureForDelete,
                                                                     lectureDateForDelete);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "3":
                                                                 break;
@@ -402,6 +421,8 @@ namespace EducationOrganaizer
                                                                     listOfTopics,
                                                                     anotherLessonCommentary, LessonEnum.Other);
                                                                 newGroup.AddAnotherLessonToListOfAnotherLessons(lesson);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "2":
                                                                 Console.WriteLine("Введите тему занятия для удаления");
@@ -412,6 +433,8 @@ namespace EducationOrganaizer
                                                                 newGroup.RemoveAnotherLessonFromListOfAnotherLessons(
                                                                     anotherLessonTopicsForDelete,
                                                                     anotherLessonDateForDelete);
+                                                                educationOrganaizer.SaveToDb(newGroup);
+
                                                                 break;
                                                             case "3":
                                                                 break;
@@ -437,38 +460,39 @@ namespace EducationOrganaizer
 
                         break;
                     case "2":
-                        educationOrganaizer.DisplayGroups();
+                        educationOrganaizer.ShowAllJson();
                         Console.WriteLine("Нажмите 1, чтобы удалить группу");
                         Console.WriteLine("Нажмите 2, чтобы вернуться назад");
                         choice = Console.ReadLine();
                         switch (choice)
                         {
-                           case "1":
-                               educationOrganaizer.DisplayGroups();
-                               Console.WriteLine("Введите название группы, напишите 'r', чтобы вернуться назад");
-                               string groupNameForDelete = Console.ReadLine();
-                               if (groupNameForDelete == "r")
-                               {
-                                   break;
-                               }
+                            case "1":
+                                educationOrganaizer.DisplayGroups();
+                                Console.WriteLine("Введите название группы, напишите 'r', чтобы вернуться назад");
+                                string groupNameForDelete = Console.ReadLine();
+                                if (groupNameForDelete == "r")
+                                {
+                                    break;
+                                }
 
-                              bool isDelete = educationOrganaizer.RemoveGroup(groupNameForDelete);
-                               if (isDelete == false)
-                               {
-                                   Console.WriteLine("Группу удалить не удалось");
-                               } 
-                               
-                               break;
-                           case "2":
-                               break;
+                                bool isDelete = educationOrganaizer.RemoveToDb(groupNameForDelete);
+                                if (isDelete == false)
+                                {
+                                    Console.WriteLine("Группу удалить не удалось");
+                                }
+
+                                break;
+                            case "2":
+                                break;
                         }
+
                         break;
                     case "3":
                         Console.WriteLine("Список групп:");
-                        educationOrganaizer.DisplayGroups();
+                        educationOrganaizer.ShowAllJson();
                         Console.WriteLine("Введите название группы для просмотра");
                         choice = Console.ReadLine();
-                        Group group = educationOrganaizer.SearchGroup(choice);
+                        Group group = educationOrganaizer.ReadGroupFromBd(choice);
                         if (group == null)
                         {
                             Console.WriteLine("Группа не найдена");
@@ -544,6 +568,7 @@ namespace EducationOrganaizer
 
                         break;
                     case "x":
+
                         return;
                 }
             }

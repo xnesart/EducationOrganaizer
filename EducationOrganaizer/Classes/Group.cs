@@ -6,16 +6,16 @@ namespace EducationOrganaizer.Classes
     public class Group
     {
         public string Name { get; set; }
-        private List<Student> ListOfStudents { get; set; }
+        public List<Student> ListOfStudents { get; set; }
         public List<Lesson> ListOfLessons { get; set; }
         public List<AbstractTask> ListOfTasks { get; set; }
 
-        private List<Lesson> ListOfSeminars { get; set; } = new List<Lesson>();
-        private List<Lesson> ListOfLectures { get; set; } = new List<Lesson>();
-        private List<Lesson> ListOfAnotherLessons { get; set; } = new List<Lesson>();
-        private List<RegularTask> ListOfRegularTasks = new List<RegularTask>();
-        private List<Project> ListOfProjects = new List<Project>();
-        private List<Testing> ListOfTesting = new List<Testing>();
+        public List<Lesson> ListOfSeminars { get; set; } = new List<Lesson>();
+        public List<Lesson> ListOfLectures { get; set; } = new List<Lesson>();
+        public List<Lesson> ListOfAnotherLessons { get; set; } = new List<Lesson>();
+        public List<RegularTask> ListOfRegularTasks = new List<RegularTask>();
+        public List<Project> ListOfProjects = new List<Project>();
+        public List<Testing> ListOfTesting = new List<Testing>();
 
         public Group(string name)
         {

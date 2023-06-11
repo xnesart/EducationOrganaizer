@@ -1,0 +1,18 @@
+{
+  "ListOfRegularTasks": [],
+  "ListOfProjects": [],
+  "ListOfTesting": [],
+  "Name": "gr4",
+  "ListOfStudents": [
+    {
+      "Name": "petrov ivan",
+      "Phone": "435435435",
+      "Mail": "786876@ta.ri"
+    }
+  ],
+  "ListOfLessons": [],
+  "ListOfTasks": [],
+  "ListOfSeminars": [],
+  "ListOfLectures": [],
+  "ListOfAnotherLessons": []
+}
