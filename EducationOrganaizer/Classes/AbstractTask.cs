@@ -10,6 +10,5 @@ namespace EducationOrganaizer.Classes
         public string SubTasks { get; set; }
         public string Type { get; set; }
         
-        public bool IsAccepted { get; set; }
     }
 }

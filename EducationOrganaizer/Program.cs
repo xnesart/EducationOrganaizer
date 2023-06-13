@@ -134,7 +134,7 @@ namespace EducationOrganaizer
                                 educationOrganaizer.SaveToDb(newGroup);
                                 break;
                               case "4":
-                                newGroup.GetStatusTaskOfStudent(returnedStudent);
+                                newGroup.DisplayTaskStatusOfStudent(returnedStudent);
                                 break;
                             }
                           }
@@ -569,16 +569,62 @@ namespace EducationOrganaizer
                   case "2":
                     Console.WriteLine("Список обычных заданий:");
                     group.DisplayRegularTasks();
+                    Console.WriteLine("1, чтобы проверить выполнение обычного задания у всех студентов");
+                    Console.WriteLine("2, назад");
+                    choice = Console.ReadLine();
 
+                    switch (choice)
+                    {
+                      case "1":
+                        Console.WriteLine("Введите название обычного задания для проверки, введите 'r', чтобы вернуться назад");
+                        choice = Console.ReadLine();
+                        if (choice == "r") break;
+                        RegularTask regularTask = group.GetRegularTask(choice);
+                        group.DisplayRegularTaskStatusOfAllStudents(regularTask);
+                        break;
+                      case "2":
+                        break;
+                    }
                     break;
                   case "3":
                     Console.WriteLine("Список тестирований:");
                     group.DisplayTestings();
+                    Console.WriteLine("1, чтобы проверить выполнение тестирования у всех студентов");
+                    Console.WriteLine("2, назад");
+                    choice = Console.ReadLine();
 
+                    switch (choice)
+                    {
+                      case "1":
+                        Console.WriteLine("Введите название проекта для проверки, введите 'r', чтобы вернуться назад");
+                        choice = Console.ReadLine();
+                        if (choice == "r") break;
+                        Testing testing = group.GetTesting(choice);
+                        group.DisplayTestingStatusOfAllStudents(testing);
+                        break;
+                      case "2":
+                        break;
+                    }
                     break;
                   case "4":
                     Console.WriteLine("Список проектов:");
                     group.DisplayProjects();
+                    Console.WriteLine("1, чтобы проверить выполнение проекта у всех студентов");
+                    Console.WriteLine("2, назад");
+                    choice = Console.ReadLine();
+
+                    switch (choice)
+                    {
+                      case "1":
+                        Console.WriteLine("Введите название проекта для проверки, введите 'r', чтобы вернуться назад");
+                        choice = Console.ReadLine();
+                        if (choice == "r") break;
+                        Project project = group.GetProject(choice);
+                        group.DisplayProjectStatusOfAllStudents(project);
+                        break;
+                      case "2":
+                        break;
+                    }
 
                     break;
                   case "5":

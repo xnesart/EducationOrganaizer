@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace EducationOrganaizer.Classes
 {
@@ -48,8 +47,100 @@ namespace EducationOrganaizer.Classes
         }
       }
     }
+    //выводит статус проекта у всех студентов
+    public void DisplayProjectStatusOfAllStudents(Project project)
+    {
+      if(project == null) return;
+      bool matching = false;
+      string taskName = "";
+      foreach (var student in ListOfStudents)
+      {
+        foreach (var task in student.ListOfAcceptedTasks)
+        {
+          if (project.Name == task.Name)
+          {
+            matching = true;
+            taskName = task.Name;
+            break;
+          }
+        }
 
-    public void GetStatusTaskOfStudent(Student student)
+        if (matching == true)
+        {
+          Console.WriteLine($"у {student.Name} зачтен(о) {taskName}");
+        }
+        else
+        {
+          Console.WriteLine($"у {student.Name} задолженность {project.Name}");
+        }
+
+        matching = false;
+      }
+    }
+    //выводит статус обычного задания у всех студентов
+    public void DisplayRegularTaskStatusOfAllStudents(RegularTask regularTask)
+    {
+      if (regularTask == null)
+      {
+        return;
+      }
+      bool matching = false;
+      string taskName = "";
+      foreach (var student in ListOfStudents)
+      {
+        foreach (var task in student.ListOfAcceptedTasks)
+        {
+          if (regularTask.Name == task.Name)
+          {
+            matching = true;
+            taskName = task.Name;
+            break;
+          }
+        }
+
+        if (matching == true)
+        {
+          Console.WriteLine($"у {student.Name} зачтен(о) {taskName}");
+        }
+        else
+        {
+          Console.WriteLine($"у {student.Name} задолженность {regularTask.Name}");
+        }
+
+        matching = false;
+      }
+    }
+    //выводит статус тестирования у всех студентов
+    public void DisplayTestingStatusOfAllStudents(Testing testing)
+    {
+      if(testing == null) return;
+      bool matching = false;
+      string taskName = "";
+      foreach (var student in ListOfStudents)
+      {
+        foreach (var task in student.ListOfAcceptedTasks)
+        {
+          if (testing.Name == task.Name)
+          {
+            matching = true;
+            taskName = task.Name;
+            break;
+          }
+        }
+
+        if (matching == true)
+        {
+          Console.WriteLine($"у {student.Name} зачтен(о) {taskName}");
+        }
+        else
+        {
+          Console.WriteLine($"у {student.Name} задолженность {testing.Name}");
+        }
+
+        matching = false;
+      }
+    }
+    public void DisplayTaskStatusOfStudent(Student student)
     {
       if (student.ListOfAcceptedTasks.Count == 0)
       {
@@ -65,6 +156,7 @@ namespace EducationOrganaizer.Classes
       }
     }
 
+    //сравнивает принятые задания с общим списком заданий у конкретного студента
     private void CompareTasks(Student student)
     {
       string[] allTaskStr = new string[ListOfAllTasks.Count];
@@ -129,6 +221,18 @@ namespace EducationOrganaizer.Classes
       AddRegularTaskToAllTasksList(regularTask);
     }
 
+    public RegularTask GetRegularTask(string regularTaskName)
+    {
+      foreach (var regularTask in ListOfRegularTasks)
+      {
+        if (regularTask.Name == regularTaskName)
+        {
+          return regularTask;
+        }
+      }
+
+      return null;
+    }
     public bool RemoveRegularTask(string name)
     {
       bool isDelete = false;
@@ -222,6 +326,18 @@ namespace EducationOrganaizer.Classes
       AddProjectTaskToAllTaskList(project);
     }
 
+    public Project GetProject(string projectName)
+    {
+      foreach (var project in ListOfProjects)
+      {
+        if (project.Name == projectName)
+        {
+          return project;
+        }
+      }
+
+      return null;
+    }
     public bool RemoveProject(string name)
     {
       bool isDelete = false;
@@ -244,6 +360,19 @@ namespace EducationOrganaizer.Classes
     {
       ListOfTesting.Add(testing);
       AddTestingTaskToAllTaskList(testing);
+    }
+    
+    public Testing GetTesting(string testingName)
+    {
+      foreach (var testing in ListOfTesting)
+      {
+        if (testing.Name == testingName)
+        {
+          return testing;
+        }
+      }
+
+      return null;
     }
 
     public bool RemoveTesting(string name)
