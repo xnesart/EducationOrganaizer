@@ -7,6 +7,7 @@ namespace EducationOrganaizer.Classes
             Name = name;
             LinkToTesting = linkToTesting;
             Deadline = deadline;
+            Type = "тестирование";
         }
     }
 }

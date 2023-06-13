@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
 using Newtonsoft.Json;
 
 namespace EducationOrganaizer.Classes
@@ -73,7 +71,8 @@ namespace EducationOrganaizer.Classes
             if (File.Exists($"{groupName}.json"))
             {
                 string json = File.ReadAllText($"{groupName}.json");
-                Group groupForReturn = JsonConvert.DeserializeObject<Group>(json);
+                var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented };
+                Group groupForReturn = JsonConvert.DeserializeObject<Group>(json,settings);
                 return groupForReturn;
             }
 
@@ -85,7 +84,8 @@ namespace EducationOrganaizer.Classes
             if (File.Exists($"{groupName}.json"))
             {
                 string json = File.ReadAllText($"{groupName}.json");
-                Group groupForReturn = JsonConvert.DeserializeObject<Group>(json);
+                var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented };
+                Group groupForReturn = JsonConvert.DeserializeObject<Group>(json,settings);
                 return groupForReturn;
             }
 
@@ -94,7 +94,8 @@ namespace EducationOrganaizer.Classes
 
         public void SaveToDb(Group newGroup)
         {
-            string json = JsonConvert.SerializeObject(newGroup, Formatting.Indented);
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, Formatting = Formatting.Indented };
+            string json = JsonConvert.SerializeObject(newGroup, settings);
             File.WriteAllText($"{newGroup.Name}.json", json);
         }
 

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using EducationOrganaizer.Classes;
-using Newtonsoft.Json;
 
 
 namespace EducationOrganaizer
@@ -467,7 +463,7 @@ namespace EducationOrganaizer
                         switch (choice)
                         {
                             case "1":
-                                educationOrganaizer.DisplayGroups();
+                                educationOrganaizer.ShowAllJson();
                                 Console.WriteLine("Введите название группы, напишите 'r', чтобы вернуться назад");
                                 string groupNameForDelete = Console.ReadLine();
                                 if (groupNameForDelete == "r")
@@ -490,6 +486,7 @@ namespace EducationOrganaizer
                     case "3":
                         Console.WriteLine("Список групп:");
                         educationOrganaizer.ShowAllJson();
+                        Console.WriteLine("//------------//");
                         Console.WriteLine("Введите название группы для просмотра");
                         choice = Console.ReadLine();
                         Group group = educationOrganaizer.ReadGroupFromBd(choice);
@@ -503,14 +500,15 @@ namespace EducationOrganaizer
                             Console.WriteLine($"{group.Name} - найдена");
                             while (true)
                             {
-                                Console.WriteLine("1, чтобы посмотреть список обычных заданий");
-                                Console.WriteLine("2, чтобы посмотреть список тестирований");
-                                Console.WriteLine("3, чтобы посмотреть список проектов");
-                                Console.WriteLine("4, чтобы посмотреть список студентов");
-                                Console.WriteLine("5, чтобы посомтреть список занятий");
-                                Console.WriteLine("6, чтобы вернуться назад");
+                                Console.WriteLine("1, чтобы посмотреть список всех заданий");
+                                Console.WriteLine("2, чтобы посмотреть список обычных заданий");
+                                Console.WriteLine("3, чтобы посмотреть список тестирований");
+                                Console.WriteLine("4, чтобы посмотреть список проектов");
+                                Console.WriteLine("5, чтобы посмотреть список студентов");
+                                Console.WriteLine("6, чтобы посомтреть список занятий");
+                                Console.WriteLine("7, чтобы вернуться назад");
                                 choice = Console.ReadLine();
-                                if (choice == "6")
+                                if (choice == "7")
                                 {
                                     break;
                                 }
@@ -518,26 +516,29 @@ namespace EducationOrganaizer
                                 switch (choice)
                                 {
                                     case "1":
+                                        group.DisplayAllTasks();
+                                        break;
+                                    case "2":
                                         Console.WriteLine("Список обычных заданий:");
                                         group.DisplayRegularTasks();
 
                                         break;
-                                    case "2":
+                                    case "3":
                                         Console.WriteLine("Список тестирований:");
                                         group.DisplayTestings();
 
                                         break;
-                                    case "3":
+                                    case "4":
                                         Console.WriteLine("Список проектов:");
                                         group.DisplayProjects();
 
                                         break;
-                                    case "4":
+                                    case "5":
                                         Console.WriteLine("Список студентов:");
                                         group.DisplayStudents();
 
                                         break;
-                                    case "5":
+                                    case "6":
                                         Console.WriteLine("1, посмотреть список лекций");
                                         Console.WriteLine("2, посмотреть список семинаров");
                                         Console.WriteLine("3, посмотреть список других занятий");

@@ -8,5 +8,8 @@ namespace EducationOrganaizer.Classes
         public string LinkToTesting { get; set; }
         public string Deadline { get; set; }
         public string SubTasks { get; set; }
+        public string Type { get; set; }
+        
+        public bool IsAccepted { get; set; }
     }
 }

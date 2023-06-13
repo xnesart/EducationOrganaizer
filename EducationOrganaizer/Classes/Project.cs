@@ -9,6 +9,7 @@ namespace EducationOrganaizer.Classes
             LinksToAdditionalMaterials = links;
             Deadline = deadline;
             SubTasks = subTasks;
+            Type = "проект";
         }
     }
 }

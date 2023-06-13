@@ -16,6 +16,7 @@ namespace EducationOrganaizer.Classes
         public List<RegularTask> ListOfRegularTasks = new List<RegularTask>();
         public List<Project> ListOfProjects = new List<Project>();
         public List<Testing> ListOfTesting = new List<Testing>();
+        public List<AbstractTask> ListOfAllTasks { get; set; } = new List<AbstractTask>();
 
         public Group(string name)
         {
@@ -25,10 +26,47 @@ namespace EducationOrganaizer.Classes
             ListOfTasks = new List<AbstractTask>();
         }
 
+        public void DisplayAllTasks()
+        {
+            if (ListOfAllTasks.Count != null)
+            {
+                foreach (var task in ListOfAllTasks)
+                {
+                    Console.WriteLine("/------------------/");
+                    Console.WriteLine(task.Name);
+                    Console.WriteLine(task.Type);
+                    Console.WriteLine(task.Description);
+                    Console.WriteLine(task.Deadline);
+                    Console.WriteLine("/------------------/");
+                }
+            }
+        }
 
+        //добавление заданий в общий список заданий группы
+        private void AddRegularTaskToAllTasksList(RegularTask regularTask)
+        {
+            AbstractTask task = regularTask;
+            ListOfAllTasks.Add(task);
+        }
+
+        private void AddTestingTaskToAllTaskList(Testing testing)
+        {
+            AbstractTask task = testing;
+            ListOfAllTasks.Add(task);
+        }
+
+        private void AddProjectTaskToAllTaskList(Project project)
+        {
+            AbstractTask task = project;
+            ListOfAllTasks.Add(task);
+        }
+        //добавление заданий в общий список заданий группы - конец
+
+        //работа с заданиями 
         public void AddRegularTask(RegularTask regularTask)
         {
             ListOfRegularTasks.Add(regularTask);
+            AddRegularTaskToAllTasksList(regularTask);
         }
 
         public bool RemoveRegularTask(string name)
@@ -39,6 +77,7 @@ namespace EducationOrganaizer.Classes
                 if (regularTask.Name.Contains(name))
                 {
                     ListOfRegularTasks.Remove(regularTask);
+                    ListOfAllTasks.Remove(regularTask);
                     Console.WriteLine("Задание удалено");
                     isDelete = true;
                     return isDelete;
@@ -106,6 +145,7 @@ namespace EducationOrganaizer.Classes
         public void AddProject(Project project)
         {
             ListOfProjects.Add(project);
+            AddProjectTaskToAllTaskList(project);
         }
 
         public bool RemoveProject(string name)
@@ -116,6 +156,7 @@ namespace EducationOrganaizer.Classes
                 if (project.Name.Contains(name))
                 {
                     ListOfProjects.Remove(project);
+                    ListOfAllTasks.Remove(project);
                     Console.WriteLine("Проект удален");
                     isDelete = true;
                     return isDelete;
@@ -128,6 +169,7 @@ namespace EducationOrganaizer.Classes
         public void AddTesting(Testing testing)
         {
             ListOfTesting.Add(testing);
+            AddTestingTaskToAllTaskList(testing);
         }
 
         public bool RemoveTesting(string name)
@@ -138,6 +180,7 @@ namespace EducationOrganaizer.Classes
                 if (testing.Name.Contains(name))
                 {
                     ListOfTesting.Remove(testing);
+                    ListOfAllTasks.Remove(testing);
                     Console.WriteLine("Тестирование удалено");
                     isDelete = true;
                     return isDelete;
@@ -159,6 +202,7 @@ namespace EducationOrganaizer.Classes
             }
         }
 
+        //работа с заданиями конец
         public void DisplaySeminarsInGroup()
         {
             foreach (var seminar in ListOfSeminars)

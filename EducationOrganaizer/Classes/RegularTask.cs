@@ -10,6 +10,7 @@ namespace EducationOrganaizer.Classes
             Description = description;
             LinksToAdditionalMaterials = links;
             Deadline = deadline;
+            Type = "обычное задание";
         }
     }
 }
