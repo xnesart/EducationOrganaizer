@@ -9,6 +9,16 @@
       "SubTasks": null,
       "Type": "обычное задание",
       "IsAccepted": false
+    },
+    {
+      "Name": "второе задание",
+      "Description": "какое то задание",
+      "LinksToAdditionalMaterials": "нет",
+      "LinkToTesting": null,
+      "Deadline": "09 05 2023",
+      "SubTasks": null,
+      "Type": "обычное задание",
+      "IsAccepted": false
     }
   ],
   "ListOfProjects": [
@@ -40,7 +50,38 @@
     {
       "Name": "John Snow",
       "Phone": "030405",
-      "Mail": "snow@gmail.com"
+      "Mail": "snow@gmail.com",
+      "ListOfAcceptedTasks": [
+        {
+          "$type": "EducationOrganaizer.Classes.RegularTask, EducationOrganaizer",
+          "Name": "проект №1",
+          "Description": "",
+          "LinksToAdditionalMaterials": "",
+          "LinkToTesting": null,
+          "Deadline": "",
+          "SubTasks": null,
+          "Type": "обычное задание",
+          "IsAccepted": false
+        }
+      ]
+    },
+    {
+      "Name": "petr",
+      "Phone": "3423424",
+      "Mail": "kia@ru",
+      "ListOfAcceptedTasks": [
+        {
+          "$type": "EducationOrganaizer.Classes.RegularTask, EducationOrganaizer",
+          "Name": "тестирование",
+          "Description": "",
+          "LinksToAdditionalMaterials": "",
+          "LinkToTesting": null,
+          "Deadline": "",
+          "SubTasks": null,
+          "Type": "обычное задание",
+          "IsAccepted": false
+        }
+      ]
     }
   ],
   "ListOfLessons": [],
@@ -101,6 +142,17 @@
       "Deadline": "090109",
       "SubTasks": "нужно сделать все задания",
       "Type": "проект",
+      "IsAccepted": false
+    },
+    {
+      "$type": "EducationOrganaizer.Classes.RegularTask, EducationOrganaizer",
+      "Name": "второе задание",
+      "Description": "какое то задание",
+      "LinksToAdditionalMaterials": "нет",
+      "LinkToTesting": null,
+      "Deadline": "09 05 2023",
+      "SubTasks": null,
+      "Type": "обычное задание",
       "IsAccepted": false
     }
   ]
